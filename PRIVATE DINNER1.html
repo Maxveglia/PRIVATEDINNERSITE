@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gourmet Underground | Experiencias Gastronómicas para Millennials</title>
+    <meta name="description" content="Cenas privadas con chefs top a precios que no arruinarán tu presupuesto">
+    <meta name="keywords" content="gourmet, cenas privadas, experiencias gastronómicas, millennials, chefs, Madrid">
+    <meta name="author" content="Gourmet Underground">
+    <style>
+        :root {
+            --main-blue: #001a33;
+            --accent-orange: #ff8c00;
+            --dark-bg: #0d0d0d;
+            --text-light: #f5f5f5;
+            --text-dark: #333;
+            --font-main: 'Montserrat', Arial, sans-serif;
+            --font-accent: 'Playfair Display', serif;
+        }
+
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Playfair+Display:wght@700&display=swap');
+
+        body {
+            font-family: var(--font-main);
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            color: var(--text-dark);
+        }
+
+        header {
+            background-color: var(--main-blue);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .menu-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-family: var(--font-accent);
+            font-size: 1.8rem;
+            color: var(--accent-orange);
+            text-decoration: none;
+        }
+
+        .cta-button {
+            background-color: var(--accent-orange);
+            color: white;
+            padding: 10px 25px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(255, 140, 0, 0.4);
+        }
+
+        .hero {
+            background: linear-gradient(rgba(0, 26, 51, 0.85), rgba(0, 0, 0, 0.8)), 
+                        url('https://images.unsplash.com/photo-1544025162-d76694265947?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: white;
+            padding: 0 10%;
+            margin-top: 0;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .hero-content h1 {
+            font-family: var(--font-accent);
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .hero-content p {
+            font-size: 1.3rem;
+            max-width: 700px;
+            margin: 0 auto 2.5rem;
+            opacity: 0.9;
+        }
+
+        .menu-slider {
+            background-color: var(--dark-bg);
+            padding: 4rem 0;
+            overflow: hidden;
+        }
+
+        .section-title {
+            text-align: center;
+            color: white;
+            margin-bottom: 2rem;
+            font-family: var(--font-accent);
+            font-size: 2.5rem;
+        }
+
+        .slider-container {
+            display: flex;
+            gap: 1.5rem;
+            padding: 0 5%;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            padding-bottom: 1rem;
+        }
+
+        .menu-card {
+            min-width: 250px;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            scroll-snap-align: start;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .menu-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .menu-card img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+        }
+
+        .menu-content {
+            padding: 1rem;
+        }
+
+        .menu-content h3 {
+            color: var(--main-blue);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .menu-content p {
+            color: #666;
+            font-size: 0.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .price {
+            color: var(--accent-orange);
+            font-weight: bold;
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .funnel-section {
+            padding: 3rem 5%;
+        }
+
+        .chefs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .chef-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .chef-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .chef-info {
+            padding: 1rem;
+        }
+
+        .chef-info h3 {
+            color: var(--main-blue);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .chef-title {
+            color: var(--accent-orange);
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            display: block;
+        }
+
+        .testimonials {
+            background-color: var(--main-blue);
+            color: white;
+            padding: 3rem 5%;
+            text-align: center;
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .testimonial-card {
+            background: rgba(255,255,255,0.1);
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: left;
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .testimonial-author {
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        .form-container {
+            max-width: 100%;
+            margin: 0 auto;
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-family: var(--font-main);
+            font-size: 0.9rem;
+        }
+
+        footer {
+            background-color: var(--dark-bg);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 5%;
+            text-align: left;
+        }
+
+        .footer-column h3 {
+            color: var(--accent-orange);
+            margin-bottom: 1rem;
+            font-size: 1rem;
+        }
+
+        .footer-column ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .footer-column ul li a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-column ul li a:hover {
+            color: var(--accent-orange);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 1.5rem;
+        }
+
+        .social-links a {
+            color: white;
+            font-size: 1.2rem;
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover {
+            color: var(--accent-orange);
+        }
+
+        .copyright {
+            margin-top: 1.5rem;
+            opacity: 0.7;
+            font-size: 0.8rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                height: 60vh;
+            }
+
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+
+            .hero-content p {
+                font-size: 1rem;
+            }
+
+            .cta-button {
+                padding: 8px 20px;
+                font-size: 0.9rem;
+            }
+
+            .menu-card {
+                min-width: 200px;
+            }
+
+            .menu-card img {
+                height: 120px;
+            }
+
+            .menu-content h3 {
+                font-size 1rem;
+            }
+
+            .menu-content p {
+                font-size: 0.7rem;
+            }
+
+            .price {
+                font-size: 0.9rem;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .chef-img {
+                height: 150px;
+            }
+
+            .chef-info h3 {
+                font-size: 1rem;
+            }
+
+            .chef-info p {
+                font-size: 0.8rem;
+            }
+
+            .testimonial-text {
+                font-size: 0.8rem;
+            }
+
+            .testimonial-author {
+                font-size: 0.8rem;
+            }
+
+            .form-container {
+                padding: 1rem;
+            }
+
+            input, select, textarea {
+                font-size: 0.9rem;
+                padding: 8px;
+            }
+
+            .footer-column h3 {
+                font-size: 0.9rem;
+            }
+
+            .footer-column ul li {
+                font-size: 0.8rem;
+            }
+
+            .social-links a {
+                font-size: 1rem;
+            }
+        }
+    </style>
+    <script defer type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function() {
+            emailjs.init('__O71o5kVgsRwnQ7X');
+        })();
+
+        document.getElementById('reservaForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            const formData = {
+                nombre: this.nombre.value,
+                correo: this.correo.value,
+                telefono: this.telefono.value,
+                fecha: this.fecha.value,
+                personas: this.personas.value,
+                menu: this.menu.value,
+                comentarios: this.comentarios.value
+            };
+
+            emailjs.send('Nueva reserva de cena pr', 'template_ec2pmse', formData)
+                .then(function(response) {
+                    document.getElementById('mensaje').innerHTML = '<div style="background-color: #d4edda; color: #155724; padding: 15px; border-radius: 8px; text-align: center;">¡Reserva confirmada! Te hemos enviado los detalles a tu correo mveglia44@gmail.com. Prepárate para una experiencia que recordarás.</div>';
+                    document.getElementById('reservaForm').reset();
+                }, function(error) {
+                    document.getElementById('mensaje').innerHTML = '<div style="background-color: #f8d7da; color: #721c24; padding: 15px; border-radius: 8px; text-align: center;">¡Vaya! Algo salió mal. Por favor, inténtalo de nuevo o llámanos directamente al +34 910 123 456.</div>';
+                    console.error('Error al enviar el correo:', error);
+                });
+        });
+    </script>
+</head>
+<body>
+    <!-- HEADER -->
+    <header>
+        <div class="menu-container">
+            <a href="#inicio" class="logo">GourmetUnderground</a>
+            <a href="#reservas" class="cta-button">RESERVA AHORA</a>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="hero" id="inicio">
+        <div class="hero-content">
+            <h1>GASTRONOMÍA DE LUJO SIN PRECIOS DE LUJO</h1>
+            <p>Experiencias culinarias diseñadas para millennials que valoran el sabor sobre el estatus</p>
+            <a href="#menus" class="cta-button" style="padding: 15px 40px;">VER MENÚS</a>
+        </div>
+    </section>
+
+    <!-- MENÚ SLIDER -->
+    <section class="menu-slider" id="menus">
+        <h2 class="section-title">NUESTROS MENÚS ESTRELLA</h2>
+        <div class="slider-container">
+            <!-- Menú 1 -->
+            <div class="menu-card">
+                <img src="https://images.unsplash.com/photo-1544025162-d76694265947?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Street Food Gourmet">
+                <div class="menu-content">
+                    <h3>STREET FOOD GOURMET</h3>
+                    <p>Hamburguesas wagyu, tacos de cochinita pibil y otras delicias callejeras elevadas</p>
+                    <span class="price">€34/persona</span>
+                    <a href="#reservas" class="cta-button">RESERVAR</a>
+                </div>
+            </div>
+            
+            <!-- Menú 2 -->
+            <div class="menu-card">
+                <img src="https://images.unsplash.com/photo-1555244162-803834f70033?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Vegetal pero Sexy">
+                <div class="menu-content">
+                    <h3>VEGETAL PERO SEXY</h3>
+                    <p>5 platos vegetales que harán olvidar la carne incluso a los más carnívoros</p>
+                    <span class="price">€29/persona</span>
+                    <a href="#reservas" class="cta-button">RESERVAR</a>
+                </div>
+            </div>
+            
+            <!-- Menú 3 -->
+            <div class="menu-card">
+                <img src="https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Pasta Nostra">
+                <div class="menu-content">
+                    <h3>PASTA NOSTRA</h3>
+                    <p>Desde clásicos reinventados hasta creaciones originales con pasta fresca</p>
+                    <span class="price">€32/persona</span>
+                    <a href="#reservas" class="cta-button">RESERVAR</a>
+                </div>
+            </div>
+            
+            <!-- Menú 4 -->
+            <div class="menu-card">
+                <img src="https://images.unsplash.com/photo-1473093295043-cdd812d0e601?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Mar y Montaña">
+                <div class="menu-content">
+                    <h3>MAR Y MONTAÑA</h3>
+                    <p>Lo mejor de ambos mundos en un menú equilibrado y lleno de sorpresas</p>
+                    <span class="price">€37/persona</span>
+                    <a href="#reservas" class="cta-button">RESERVAR</a>
+                </div>
+            </div>
+            
+            <!-- Menú 5 -->
+            <div class="menu-card">
+                <img src="https://images.unsplash.com/photo-1565557623262-b51c2513a641?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Asian Fusion">
+                <div class="menu-content">
+                    <h3>ASIAN FUSION</h3>
+                    <p>Sabores de oriente con toques occidentales que explotan en tu boca</p>
+                    <span class="price">€35/persona</span>
+                    <a href="#reservas" class="cta-button">RESERVAR</a>
+                </div>
+            </div>
+            
+            <!-- Menú 6 -->
+            <div class="menu-card">
+                <img src="https://images.unsplash.com/photo-1467003909585-2f8a72700288?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Carne con Clase">
+                <div class="menu-content">
+                    <h3>CARNE CON CLASE</h3>
+                    <p>Cortes premium con técnicas de cocción que respetan el producto</p>
+                    <span class="price">€39/persona</span>
+                    <a href="#reservas" class="cta-button">RESERVAR</a>
+                </div>
+            </div>
+            
+            <!-- Menú 7 -->
+            <div class="menu-card">
+                <img src="https://images.unsplash.com/photo-1563805042-7684c019e1cb?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Pescado que enamora">
+                <div class="menu-content">
+                    <h3>PESCADO QUE ENAMORA</h3>
+                    <p>Del mar a tu mesa con las técnicas más innovadoras</p>
+                    <span class="price">€36/persona</span>
+                    <a href="#reservas" class="cta-button">RESERVAR</a>
+                </div>
+            </div>
+            
+            <!-- Menú 8 -->
+            <div class="menu-card">
+                <img src="https://images.unsplash.com/photo-1530006260051-0c3e1a57d5ad?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Tapas Revolution">
+                <div class="menu-content">
+                    <h3>TAPAS REVOLUTION</h3>
+                    <p>Lo mejor de la tradición española con un toque vanguardista</p>
+                    <span class="price">€28/persona</span>
+                    <a href="#reservas" class="cta-button">RESERVAR</a>
+                </div>
+            </div>
+            
+            <!-- Menú 9 -->
+            <div class="menu-card">
+                <img src="https://images.unsplash.com/photo-1551504734-5ee1c4a1479b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Postres que son Arte">
+                <div class="menu-content">
+                    <h3>POSTRES QUE SON ARTE</h3>
+                    <p>Experiencia dulce para terminar con broche de oro</p>
+                    <span class="price">€26/persona</span>
+                    <a href="#reservas" class="cta-button">RESERVAR</a>
+                </div>
+            </div>
+            
+            <!-- Menú 10 -->
+            <div class="menu-card">
+                <img src="https://images.unsplash.com/photo-1551218808-94e220e084d2?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Chef's Surprise">
+                <div class="menu-content">
+                    <h3>CHEF'S SURPRISE</h3>
+                    <p>Déjate sorprender por nuestra selección del día</p>
+                    <span class="price">€41/persona</span>
+                    <a href="#reservas" class="cta-button">RESERVAR</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN CHEFS -->
+    <section class="funnel-section" id="chefs">
+        <h2 class="section-title" style="color: var(--main-blue);">NUESTROS CHEFS REBELDES</h2>
+        <p style="text-align: center; max-width: 800px; margin: 0 auto 3rem;">Los artistas detrás de cada plato que desafían lo convencional</p>
+        
+        <div class="chefs-grid">
+            <!-- Chef 1 -->
+            <div class="chef-card">
+                <img src="https://images.unsplash.com/photo-1581299894007-aaa50297cf16?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Chef Marco Vélez" class="chef-img">
+                <div class="chef-info">
+                    <h3>MARCO VÉLEZ</h3>
+                    <span class="chef-title">El alquimista de sabores</span>
+                    <p>Marco, de 34 años, dejó un restaurante con estrella Michelin en París para revolucionar la escena gastronómica madrileña. Su pasión por la fusión latino-asiática lo lleva a crear platos como tacos de pato con salsa teriyaki. Cuando no cocina, explora mercados locales y sube reels a TikTok.</p>
+                </div>
+            </div>
+            
+            <!-- Chef 2 -->
+            <div class="chef-card">
+                <img src="https://images.unsplash.com/photo-1595476108010-b4d1f102b1b1?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Chef Sofía Ramírez" class="chef-img">
+                <div class="chef-info">
+                    <h3>SOFÍA RAMÍREZ</h3>
+                    <span class="chef-title">La reina vegetal</span>
+                    <p>Sofía, de 29 años, es una estrella emergente que ganó el "Green Chef 2022" con su menú vegano. Con raíces en la cocina mediterránea, transforma remolachas y kale en platos que enganchan. Le encanta el yoga y comparte recetas sostenibles en Instagram.</p>
+                </div>
+            </div>
+            
+            <!-- Chef 3 -->
+            <div class="chef-card">
+                <img src="https://images.unsplash.com/photo-1600566752227-8f3e7a527e1c?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Chef Antonio Rossi" class="chef-img">
+                <div class="chef-info">
+                    <h3>ANTONIO ROSSI</h3>
+                    <span class="chef-title">El carnicero poético</span>
+                    <p>Antonio, de 37 años, es un maestro de la carne que perfeccionó sus técnicas en Toscana. Sus cortes madurados y su salsa de vino tinto son legendarios. Fuera de la cocina, toca la guitarra y organiza catas de carne con amigos.</p>
+                </div>
+            </div>
+            
+            <!-- Chef 4 -->
+            <div class="chef-card">
+                <img src="https://images.unsplash.com/photo-1574699975827-8afca07f26ae?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Chef Lucía Gómez" class="chef-img">
+                <div class="chef-info">
+                    <h3>LUCÍA GÓMEZ</h3>
+                    <span class="chef-title">La reina de los postres</span>
+                    <p>Lucía, de 31 años, transforma el azúcar en arte con sus creaciones pasteleras. Su pastel de chocolate con sal marina ha conquistado paladares. Es adicta a las series de Netflix y sube sus recetas a YouTube.</p>
+                </div>
+            </div>
+            
+            <!-- Chef 5 -->
+            <div class="chef-card">
+                <img src="https://images.unsplash.com/photo-1577216939896-2f2f5e315f53?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Chef Javier Ortiz" class="chef-img">
+                <div class="chef-info">
+                    <h3>JAVIER ORTIZ</h3>
+                    <span class="chef-title">El maestro del mar</span>
+                    <p>Javier, de 33 años, creció pescando con su familia en Galicia y domina los pescados frescos. Su ceviche con toque picante es un éxito. Le apasionan los documentales marinos y los viajes en kayak.</p>
+                </div>
+            </div>
+            
+            <!-- Chef 6 -->
+            <div class="chef-card">
+                <img src="https://images.unsplash.com/photo-1574699975827-8afca07f26ae?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Chef Elena Pérez" class="chef-img">
+                <div class="chef-info">
+                    <h3>ELENA PÉREZ</h3>
+                    <span class="chef-title">La innovadora de tapas</span>
+                    <p>Elena, de 28 años, reinterpreta las tapas españolas con un giro moderno. Su croqueta de jamón con espuma de trufa es icónica. Es una amante del flamenco y comparte su vida en TikTok.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIOS -->
+    <section class="testimonials">
+        <h2 class="section-title">LO QUE DICEN NUESTROS FOODIES</h2>
+        <p style="max-width: 700px; margin: 0 auto; opacity: 0.9;">No somos nosotros, son ellos los que lo dicen</p>
+        
+        <div class="testimonial-grid">
+            <!-- Testimonio 1 -->
+            <div class="testimonial-card">
+                <div class="testimonial-text">
+                    "La mejor cena de mi vida y por menos de lo que gasto en un fin de semana de fiesta. ¡Increíble!"
+                </div>
+                <div class="testimonial-author">
+                    - Carla G., 24 años
+                </div>
+            </div>
+            
+            <!-- Testimonio 2 -->
+            <div class="testimonial-card">
+                <div class="testimonial-text">
+                    "Pensé que la comida gourmet no era para mí hasta que probé el menú 'Street Food' de Gourmet Underground."
+                </div>
+                <div class="testimonial-author">
+                    - David M., 28 años
+                </div>
+            </div>
+            
+            <!-- Testimonio 3 -->
+            <div class="testimonial-card">
+                <div class="testimonial-text">
+                    "Llevé a mi pareja para nuestro aniversario y ahora todos nuestros amigos quieren repetir la experiencia."
+                </div>
+                <div class="testimonial-author">
+                    - Ana y Jorge, 26 y 29 años
+                </div>
+            </div>
+            
+            <!-- Testimonio 4 -->
+            <div class="testimonial-card">
+                <div class="testimonial-text">
+                    "El menú 'Vegetal pero Sexy' me voló la cabeza, y el precio es un robo en el buen sentido. ¡Volveré!"
+                </div>
+                <div class="testimonial-author">
+                    - Paula S., 25 años
+                </div>
+            </div>
+            
+            <!-- Testimonio 5 -->
+            <div class="testimonial-card">
+                <div class="testimonial-text">
+                    "La experiencia con el chef Antonio fue épica, y por €39 no puedo pedir más. Recomendado 100%."
+                </div>
+                <div class="testimonial-author">
+                    - Miguel R., 27 años
+                </div>
+            </div>
+            
+            <!-- Testimonio 6 -->
+            <div class="testimonial-card">
+                <div class="testimonial-text">
+                    "El 'Chef's Surprise' fue una locura, cada bocado era una sorpresa. Perfecto para una noche con amigos."
+                </div>
+                <div class="testimonial-author">
+                    - Laura T., 30 años
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FORMULARIO DE RESERVA -->
+    <section class="funnel-section" id="reservas" style="background-color: #f5f5f5;">
+        <h2 class="section-title" style="color: var(--main-blue);">RESERVA TU EXPERIENCIA</h2>
+        <p style="text-align: center; max-width: 700px; margin: 0 auto 3rem;">Solo necesitamos unos detalles para preparar algo extraordinario</p>
+        
+        <div class="form-container">
+            <form id="reservaForm">
+                <label>Nombre completo</label>
+                <input type="text" name="nombre" placeholder="Ej: Alex Martínez" required>
+                
+                <label>Correo electrónico</label>
+                <input type="email" name="correo" placeholder="tucorreo@ejemplo.com" required>
+                
+                <label>Teléfono</label>
+                <input type="tel" name="telefono" placeholder="Ej: +34 600 123 456">
+                
+                <label>Fecha y hora preferida</label>
+                <input type="datetime-local" name="fecha" required>
+                
+                <label>Número de personas</label>
+                <input type="number" name="personas" min="2" max="12" placeholder="De 2 a 12 personas" required>
+                
+                <label>Menú de interés</label>
+                <select name="menu">
+                    <option value="">Selecciona tu favorito</option>
+                    <option value="street_food">Street Food Gourmet (€34)</option>
+                    <option value="vegetal">Vegetal pero Sexy (€29)</option>
+                    <option value="pasta">Pasta Nostra (€32)</option>
+                    <option value="mar_montana">Mar y Montaña (€37)</option>
+                    <option value="asian">Asian Fusion (€35)</option>
+                    <option value="carne">Carne con Clase (€39)</option>
+                    <option value="pescado">Pescado que Enamora (€36)</option>
+                    <option value="tapas">Tapas Revolution (€28)</option>
+                    <option value="postres">Postres que son Arte (€26)</option>
+                    <option value="sorpresa">Chef's Surprise (€41)</option>
+                </select>
+                
+                <label>¿Alguna alergia o preferencia especial?</label>
+                <textarea name="comentarios" rows="3" placeholder="Ej: Soy alérgico a los frutos secos pero por lo demás aventurero"></textarea>
+                
+                <button type="submit" class="cta-button" style="width: 100%; border: none; cursor: pointer;">CONFIRMAR RESERVA</button>
+            </form>
+            <div id="mensaje" style="margin-top: 1.5rem;"></div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer id="contacto">
+        <div class="footer-grid">
+            <div class="footer-column">
+                <h3>Gourmet Underground</h3>
+                <ul>
+                    <li><a href="#inicio">Inicio</a></li>
+                    <li><a href="#menus">Menús</a></li>
+                    <li><a href="#chefs">Chefs</a></li>
+                    <li><a href="#reservas">Reservas</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Legal</h3>
+                <ul>
+                    <li><a href="#">Términos y condiciones</a></li>
+                    <li><a href="#">Política de privacidad</a></li>
+                    <li><a href="#">Política de cookies</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Contacto</h3>
+                <ul>
+                    <li>📍 Calle Sabores 123, Madrid</li>
+                    <li>📞 +34 910 123 456</li>
+                    <li>✉️ hola@gourmetunderground.com</li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Horario</h3>
+                <ul>
+                    <li>Lunes a Viernes: 19:00 - 00:00</li>
+                    <li>Sábados: 13:00 - 00:00</li>
+                    <li>Domingos: Cerrado</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="social-links">
+            <a href="#">Instagram</a>
+            <a href="#">TikTok</a>
+            <a href="#">Spotify</a>
+        </div>
+        
+        <div class="copyright">
+            © 2023 Gourmet Underground. Todos los derechos reservados. #NoEsCenaEsVida
+        </div>
+    </footer>
+</body>
+</html>
